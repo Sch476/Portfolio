@@ -68,7 +68,7 @@ export default function Hero() {
             href="#contact"
             className="px-7 py-3 rounded-full border border-border text-text-dim text-sm font-medium hover:text-text-bright hover:border-border-hover transition-all duration-300"
           >
-            Say hello
+            Contact
           </a>
         </div>
       </div>
