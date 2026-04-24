@@ -4,18 +4,21 @@ const projects = [
     summary: 'Real-time parking detection using computer vision and a cross-platform mobile app for live availability and reservations.',
     tech: ['React Native', 'Node.js', 'MySQL', 'OpenCV'],
     accent: 'var(--color-accent)',
+    link: 'https://github.com/Sch476/SIH1515',
   },
   {
     title: 'E-Commerce CDC Pipeline',
     summary: 'End-to-end change data capture pipeline with a Medallion Architecture, streaming into a DuckDB warehouse with live dashboards.',
     tech: ['Python', 'Kafka', 'PostgreSQL', 'dbt', 'Airflow'],
     accent: 'var(--color-accent2)',
+    link: 'https://github.com/Sch476/CDC-Pipeline',
   },
   {
     title: 'Planet Care',
     summary: 'Sustainability web app integrating AI for personalized recycling and conservation tips, with secure Auth0 authentication.',
     tech: ['React', 'Django', 'Tailwind CSS', 'ChatGPT API'],
     accent: 'var(--color-accent3)',
+    link: 'https://hack-odisha.vercel.app/',
   },
 ]
 
@@ -30,9 +33,12 @@ export default function Projects() {
 
         <div className="grid gap-6 md:grid-cols-3">
           {projects.map((p, i) => (
-            <div
+            <a
               key={p.title}
-              className={`reveal reveal-delay-${i + 1} glass shine rounded-2xl p-6 flex flex-col`}
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`reveal reveal-delay-${i + 1} glass shine rounded-2xl p-6 flex flex-col hover:-translate-y-1 transition-transform duration-300`}
             >
               {/* Accent line */}
               <div
@@ -50,7 +56,7 @@ export default function Projects() {
                   <span key={t} className="tag">{t}</span>
                 ))}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
