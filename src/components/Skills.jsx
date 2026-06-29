@@ -1,44 +1,65 @@
-const groups = [
-  {
-    label: 'Languages',
-    items: ['Python', 'C++', 'Java', 'JavaScript', 'SQL'],
-  },
-  {
-    label: 'Frontend',
-    items: ['React', 'React Native', 'Tailwind CSS', 'HTML/CSS'],
-  },
-  {
-    label: 'Backend',
-    items: ['Node.js', 'Express', 'Django', 'FastAPI'],
-  },
-  {
-    label: 'Data & Cloud',
-    items: ['PostgreSQL', 'MySQL', 'Kafka', 'DuckDB', 'dbt', 'Airflow', 'Azure'],
-  },
-]
+import { skillGroups } from '../data'
+
+const mono = "'JetBrains Mono', monospace"
+const serif = "'Newsreader', serif"
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 px-6">
-      <div className="max-w-5xl mx-auto">
-        <p className="reveal text-xs uppercase tracking-widest text-accent mb-3 font-mono">Skills</p>
-        <h2 className="reveal text-3xl sm:text-4xl font-bold text-text-bright mb-16">
-          Tech I work with
-        </h2>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {groups.map((g, i) => (
-            <div key={g.label} className={`reveal reveal-delay-${(i % 3) + 1}`}>
-              <h3 className="text-xs uppercase tracking-widest text-text-dim mb-4 font-mono">
-                {g.label}
-              </h3>
-              <div className="flex flex-col gap-2">
-                {g.items.map((item) => (
-                  <span
-                    key={item}
-                    className="glass shine rounded-lg px-4 py-2.5 text-sm text-text cursor-default"
-                  >
-                    {item}
+    <section
+      id="skills"
+      style={{ scrollMarginTop: 80, background: 'var(--bg2)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}
+    >
+      <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(64px,10vw,120px) clamp(20px,5vw,56px)' }}>
+        <div data-reveal style={{ marginBottom: 'clamp(32px,5vw,52px)' }}>
+          <div
+            style={{
+              fontFamily: mono,
+              fontSize: 12,
+              letterSpacing: '.22em',
+              textTransform: 'uppercase',
+              color: 'var(--gold)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+            }}
+          >
+            <span style={{ width: 26, height: 1, background: 'var(--gold)' }} />
+            02 — Toolkit
+          </div>
+          <h2
+            style={{
+              margin: '14px 0 0',
+              fontFamily: serif,
+              fontWeight: 500,
+              fontSize: 'clamp(30px,5vw,52px)',
+              lineHeight: 1.04,
+              letterSpacing: '-0.01em',
+              color: 'var(--text)',
+            }}
+          >
+            The stack I reach for.
+          </h2>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 36 }}>
+          {skillGroups.map((group) => (
+            <div key={group.name} data-reveal style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div
+                style={{
+                  fontFamily: mono,
+                  fontSize: 11,
+                  letterSpacing: '.16em',
+                  textTransform: 'uppercase',
+                  color: 'var(--muted)',
+                  paddingBottom: 12,
+                  borderBottom: '1px solid var(--border)',
+                }}
+              >
+                {group.name}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {group.items.map((skill) => (
+                  <span key={skill} data-cursor className="skill">
+                    {skill}
                   </span>
                 ))}
               </div>

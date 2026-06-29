@@ -1,52 +1,189 @@
-export default function Contact() {
-  return (
-    <section id="contact" className="py-28 px-6">
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="reveal text-xs uppercase tracking-widest text-accent mb-3 font-mono">Contact</p>
-        <h2 className="reveal text-3xl sm:text-5xl font-bold text-text-bright mb-6">
-          Let's build something together
-        </h2>
-        <p className="reveal reveal-delay-1 text-text-dim max-w-md mx-auto mb-12 leading-relaxed">
-          I'm looking for full-time roles and interesting collaborations.
-          Drop me a line — I'd love to chat.
-        </p>
+import { useState } from 'react'
+import { heroLinks } from '../data'
+import { extAttrs, preventHash } from '../util'
 
-        <div className="reveal reveal-delay-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="mailto:sayantanchr13@gmail.com"
-            className="group glass shine rounded-full px-8 py-3.5 text-sm font-medium text-text-bright inline-flex items-center gap-3"
+const mono = "'JetBrains Mono', monospace"
+const serif = "'Newsreader', serif"
+
+const labelStyle = {
+  fontFamily: mono,
+  fontSize: 11,
+  letterSpacing: '.12em',
+  textTransform: 'uppercase',
+  color: 'var(--muted)',
+}
+const errStyle = { fontFamily: mono, fontSize: 11.5, color: '#E5786A' }
+const fieldWrap = { display: 'flex', flexDirection: 'column', gap: 8 }
+
+export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [errors, setErrors] = useState({})
+  const [sent, setSent] = useState(false)
+
+  const update = (key) => (e) => {
+    const v = e.target.value
+    setForm((f) => ({ ...f, [key]: v }))
+    setErrors((er) => ({ ...er, [key]: undefined }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const errs = {}
+    if (!form.name.trim()) errs.name = 'Please tell me your name.'
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) errs.email = 'Enter a valid email address.'
+    if (form.message.trim().length < 10) errs.message = 'A little more detail, please (10+ chars).'
+    if (Object.keys(errs).length) {
+      setErrors(errs)
+      return
+    }
+    setErrors({})
+    setSent(true)
+  }
+
+  const resetForm = () => {
+    setSent(false)
+    setForm({ name: '', email: '', message: '' })
+    setErrors({})
+  }
+
+  return (
+    <section
+      id="contact"
+      style={{ scrollMarginTop: 80, maxWidth: 1180, margin: '0 auto', padding: 'clamp(64px,10vw,128px) clamp(20px,5vw,56px)' }}
+    >
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(36px,6vw,72px)' }}>
+        <div data-reveal style={{ flex: '1 1 360px', minWidth: 300 }}>
+          <div
+            style={{
+              fontFamily: mono,
+              fontSize: 12,
+              letterSpacing: '.22em',
+              textTransform: 'uppercase',
+              color: 'var(--gold)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+            }}
           >
-            <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
+            <span style={{ width: 26, height: 1, background: 'var(--gold)' }} />
+            05 — Contact
+          </div>
+          <h2
+            style={{
+              margin: '14px 0 0',
+              fontFamily: serif,
+              fontWeight: 500,
+              fontSize: 'clamp(34px,5.5vw,60px)',
+              lineHeight: 1.02,
+              letterSpacing: '-0.01em',
+              color: 'var(--text)',
+            }}
+          >
+            Let&apos;s build
+            <br />
+            something together.
+          </h2>
+          <p style={{ margin: '22px 0 0', maxWidth: 420, fontSize: 15.5, lineHeight: 1.65, color: 'var(--muted)' }}>
+            I&apos;m looking for full-time roles and interesting collaborations. Drop me a line — I&apos;d love to chat.
+          </p>
+          <a href="mailto:sayantanchr13@gmail.com" data-cursor className="link-underline" style={{ marginTop: 24 }}>
             sayantanchr13@gmail.com
-            <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
           </a>
+          <div style={{ display: 'flex', gap: 10, marginTop: 28 }}>
+            {heroLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={preventHash}
+                {...extAttrs(item.href)}
+                data-cursor
+                className="chip chip--sm"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
         </div>
 
-        <div className="reveal reveal-delay-3 mt-8 flex justify-center gap-6">
-          <a
-            href="https://linkedin.com/in/sayantan-choudhury/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-text-dim hover:text-accent transition-colors duration-300"
-            aria-label="LinkedIn"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-          </a>
-          <a
-            href="https://github.com/Sch476"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-text-dim hover:text-accent transition-colors duration-300"
-            aria-label="GitHub"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-            </svg>
-          </a>
+        <div data-reveal style={{ flex: '1 1 380px', minWidth: 300 }}>
+          {!sent && (
+            <form
+              onSubmit={onSubmit}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 18,
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: 18,
+                padding: 'clamp(22px,3vw,34px)',
+              }}
+            >
+              <div style={fieldWrap}>
+                <label style={labelStyle}>Name</label>
+                <input type="text" value={form.name} onChange={update('name')} placeholder="Jane Doe" className="field" />
+                {errors.name && <span style={errStyle}>{errors.name}</span>}
+              </div>
+              <div style={fieldWrap}>
+                <label style={labelStyle}>Email</label>
+                <input type="email" value={form.email} onChange={update('email')} placeholder="jane@company.com" className="field" />
+                {errors.email && <span style={errStyle}>{errors.email}</span>}
+              </div>
+              <div style={fieldWrap}>
+                <label style={labelStyle}>Message</label>
+                <textarea
+                  value={form.message}
+                  onChange={update('message')}
+                  rows={4}
+                  placeholder="Tell me about the role or idea…"
+                  className="field field--area"
+                />
+                {errors.message && <span style={errStyle}>{errors.message}</span>}
+              </div>
+              <button type="submit" data-cursor className="btn-submit">
+                Send message →
+              </button>
+            </form>
+          )}
+          {sent && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center',
+                gap: 14,
+                background: 'var(--surface)',
+                border: '1px solid var(--gold)',
+                borderRadius: 18,
+                padding: 'clamp(34px,5vw,56px)',
+              }}
+            >
+              <span
+                style={{
+                  width: 54,
+                  height: 54,
+                  borderRadius: '50%',
+                  border: '1.5px solid var(--gold)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 24,
+                  color: 'var(--gold)',
+                }}
+              >
+                ✓
+              </span>
+              <h3 style={{ margin: 0, fontFamily: serif, fontWeight: 500, fontSize: 26, color: 'var(--text)' }}>Message sent</h3>
+              <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: 'var(--muted)', maxWidth: 300 }}>
+                Thanks for reaching out — I&apos;ll get back to you shortly. (This is a demo form, no email actually leaves the
+                page.)
+              </p>
+              <button onClick={resetForm} data-cursor className="btn-reset">
+                Send another
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
