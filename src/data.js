@@ -24,7 +24,7 @@ export const stats = [
   { count: 3, suffix: '+', display: '3+', label: 'Projects shipped', note: 'open-source on GitHub' },
   { count: 20, suffix: '+', display: '20+', label: 'Technologies', note: 'languages, frameworks & tools' },
   { count: 1, suffix: '', display: '1', label: 'GenAI internship', note: 'LTIMindtree · 2025' },
-  { count: null, suffix: '', display: "CS '25", label: 'Graduating', note: 'B.Tech · Computer Science' },
+  { count: null, suffix: '', display: "CS '26", label: 'Graduating', note: 'B.Tech · Computer Science' },
 ]
 
 export const featured = {
@@ -81,11 +81,11 @@ export const profiles = [
 export const education = {
   degree: 'B.Tech · Computer Science',
   school: '', // TODO: add your university name
-  badges: ['Expected 2025'],
+  badges: ['Class of 2026'],
 }
 
 export const timeline = [
-  { when: '2025 — Now', what: 'Open to full-time roles', where: 'Full-stack · Data · GenAI' },
+  { when: '2026 — Now', what: 'Open to full-time roles', where: 'Full-stack · Data · GenAI' },
+  { when: 'Jun 2026', what: 'B.Tech, Computer Science', where: 'Graduating' },
   { when: 'Apr – May 2025', what: 'GenAI Intern', where: 'LTIMindtree · Kolkata' },
-  { when: '2021 – 2025', what: 'B.Tech, Computer Science', where: 'Undergraduate' },
 ]
