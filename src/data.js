@@ -3,6 +3,11 @@
 export const RESUME_URL =
 'https://drive.google.com/file/d/1ZpAxrY33cHrdFPollmsAcywcECx7cMSz/view?usp=sharing'
 
+// Contact form delivery (Web3Forms). The access key lives in .env as
+// VITE_CONTACT_ACCESS_KEY — copy .env.example to .env and paste your key.
+// Get a free key at https://web3forms.com.
+export const CONTACT_ACCESS_KEY = import.meta.env.VITE_CONTACT_ACCESS_KEY || ''
+
 export const navItems = [
   { label: 'Work', href: '#work' },
   { label: 'Skills', href: '#skills' },

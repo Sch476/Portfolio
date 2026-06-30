@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { heroLinks } from '../data'
+import { CONTACT_ACCESS_KEY, heroLinks } from '../data'
 import { extAttrs, preventHash } from '../util'
 
 const mono = "'JetBrains Mono', monospace"
@@ -19,6 +19,9 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+  const [hp, setHp] = useState('') // honeypot
 
   const update = (key) => (e) => {
     const v = e.target.value
@@ -26,7 +29,7 @@ export default function Contact() {
     setErrors((er) => ({ ...er, [key]: undefined }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const errs = {}
     if (!form.name.trim()) errs.name = 'Please tell me your name.'
@@ -37,11 +40,45 @@ export default function Contact() {
       return
     }
     setErrors({})
-    setSent(true)
+    setSubmitError(null)
+
+    // Silently swallow honeypot hits (likely bots).
+    if (hp) {
+      setSent(true)
+      return
+    }
+
+    setSending(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: CONTACT_ACCESS_KEY,
+          subject: `Portfolio message from ${form.name}`,
+          from_name: form.name,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSent(true)
+      } else {
+        setSubmitError(data.message || 'Something went wrong. Please email me directly.')
+      }
+    } catch {
+      setSubmitError('Network error — please email me directly at sayantanchr13@gmail.com.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const resetForm = () => {
     setSent(false)
+    setSending(false)
+    setSubmitError(null)
     setForm({ name: '', email: '', message: '' })
     setErrors({})
   }
@@ -140,9 +177,27 @@ export default function Contact() {
                 />
                 {errors.message && <span style={errStyle}>{errors.message}</span>}
               </div>
-              <button type="submit" data-cursor className="btn-submit">
-                Send message →
+              {/* honeypot — hidden from humans, catches bots */}
+              <input
+                type="text"
+                name="company"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+              />
+              <button
+                type="submit"
+                data-cursor
+                className="btn-submit"
+                disabled={sending}
+                style={sending ? { opacity: 0.7, cursor: 'wait' } : undefined}
+              >
+                {sending ? 'Sending…' : 'Send message →'}
               </button>
+              {submitError && <span style={errStyle}>{submitError}</span>}
             </form>
           )}
           {sent && (
@@ -176,8 +231,7 @@ export default function Contact() {
               </span>
               <h3 style={{ margin: 0, fontFamily: serif, fontWeight: 500, fontSize: 26, color: 'var(--text)' }}>Message sent</h3>
               <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: 'var(--muted)', maxWidth: 300 }}>
-                Thanks for reaching out — I&apos;ll get back to you shortly. (This is a demo form, no email actually leaves the
-                page.)
+                Thanks for reaching out — your message landed in my inbox and I&apos;ll get back to you shortly.
               </p>
               <button onClick={resetForm} data-cursor className="btn-reset">
                 Send another
