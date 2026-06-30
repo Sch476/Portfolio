@@ -1,7 +1,7 @@
 // Content for the portfolio. Edit here to update copy without touching markup.
 
 export const RESUME_URL =
-  'https://drive.google.com/file/d/1tMRllaN1XutftjPKhkOc7FXoCWhPu8QV/view?usp=sharing'
+'https://drive.google.com/file/d/1ZpAxrY33cHrdFPollmsAcywcECx7cMSz/view?usp=sharing'
 
 export const navItems = [
   { label: 'Work', href: '#work' },
@@ -95,7 +95,6 @@ export const education = {
 }
 
 export const timeline = [
-  { when: '2026 — Now', what: 'Open to full-time roles', where: 'Full-stack · Data · GenAI' },
   { when: '2022 – 2026', what: 'B.Tech, Computer Science & Engineering', where: 'Heritage Institute of Technology' },
   { when: 'Apr – May 2025', what: 'GenAI Intern', where: 'LTIMindtree · Kolkata' },
 ]
