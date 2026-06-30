@@ -71,7 +71,7 @@ export default function Achievements() {
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
               <span style={tagPill}>{a.tag}</span>
-              <span style={{ fontFamily: mono, fontSize: 12, color: 'var(--faint)' }}>{a.year}</span>
+              {a.year && <span style={{ fontFamily: mono, fontSize: 12, color: 'var(--faint)' }}>{a.year}</span>}
             </div>
             <h3 style={{ margin: 0, fontFamily: serif, fontWeight: 500, fontSize: 22, lineHeight: 1.2, color: 'var(--text)' }}>
               {a.title}

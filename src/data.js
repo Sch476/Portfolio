@@ -114,7 +114,6 @@ export const achievements = [
     detail: 'Top finisher in the official college screening round for the Smart India Hackathon (SIH).',
   },
   {
-    year: 'Ongoing',
     tag: 'QA',
     title: 'Freelance QA Tester',
     detail: 'Regression testing and test authoring across consumer and enterprise products at Testlio, Test IO, uTest and oPrimes.',
