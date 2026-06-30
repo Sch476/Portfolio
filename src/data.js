@@ -21,10 +21,10 @@ export const heroLinks = [
 // Honest, derived counts — no invented achievement numbers. The 4th tile is
 // static (count: null) so it isn't run through the count-up animation.
 export const stats = [
-  { count: 4, suffix: '', display: '4', label: 'Projects shipped', note: 'web · data · AI' },
-  { count: 20, suffix: '+', display: '20+', label: 'Technologies', note: 'languages, frameworks & tools' },
-  { count: 1, suffix: '', display: '1', label: 'GenAI internship', note: 'LTIMindtree · 2025' },
-  { count: null, suffix: '', display: "CS '26", label: 'Graduating', note: 'B.Tech · Computer Science' },
+  { count: 10, suffix: '+', display: '10+', label: 'Projects built', note: 'web · data · AI' },
+  { count: 15, suffix: '+', display: '15+', label: 'Open-source projects', note: 'contributed to' },
+  { count: 3, suffix: '', display: '3', label: 'Shipped at internship', note: 'LTIMindtree · GenAI' },
+  { count: null, suffix: '', display: "CS '26", label: 'Graduated', note: 'B.Tech · CSE' },
 ]
 
 export const featured = {

@@ -36,7 +36,7 @@ export default function About() {
             04 — Summary
           </div>
           <p style={{ margin: '22px 0 0', fontFamily: serif, fontSize: 'clamp(22px,2.8vw,30px)', lineHeight: 1.4, color: 'var(--text)', fontWeight: 400 }}>
-            I&apos;m a final-year Computer Science student who likes building across the full stack — web apps, data pipelines
+            I&apos;m a Computer Science graduate who likes building across the full stack — web apps, data pipelines
             and AI-powered tools.
           </p>
           <p style={{ margin: '20px 0 0', fontSize: 15.5, lineHeight: 1.7, color: 'var(--muted)' }}>

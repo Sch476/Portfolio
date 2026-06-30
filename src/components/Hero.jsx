@@ -212,7 +212,7 @@ export default function Hero() {
             }}
           >
             I build modern web apps, data pipelines and AI-powered tools — from computer-vision systems to
-            change-data-capture pipelines. Currently finishing my CS degree and looking for my next challenge.
+            change-data-capture pipelines. A recent Computer Science graduate looking for my next challenge.
           </p>
           <div data-reveal style={{ display: 'flex', flexWrap: 'wrap', gap: 13, marginTop: 32 }}>
             <a href="#work" data-cursor className="btn-primary">

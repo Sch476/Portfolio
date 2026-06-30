@@ -33,7 +33,7 @@ export default function Footer() {
               </span>
             </div>
             <p style={{ margin: '16px 0 0', fontSize: 13.5, lineHeight: 1.6, color: 'var(--muted)' }}>
-              Computer Science student building across full-stack, data and GenAI. Based in Kolkata, India.
+              Computer Science graduate building across full-stack, data and GenAI. Based in Kolkata, India.
             </p>
           </div>
           <div style={{ display: 'flex', gap: 'clamp(28px,6vw,64px)', flexWrap: 'wrap' }}>
