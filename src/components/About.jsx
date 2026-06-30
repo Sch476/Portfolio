@@ -45,9 +45,10 @@ export default function About() {
             delivery, and an NLP-to-SQL system I improved through prompt engineering.
           </p>
           <p style={{ margin: '16px 0 0', fontSize: 15.5, lineHeight: 1.7, color: 'var(--muted)' }}>
-            Outside of that I&apos;m drawn to the data and backend side of things — change-data-capture pipelines, warehouses and
-            APIs — and I care about shipping tools people actually use. Right now I&apos;m looking for a full-time role where I
-            can keep learning and own real surface area.
+            My final-year project, MediSync, is an AI healthcare-middleware layer connecting doctors, insurers and patients —
+            structuring clinical notes, adjudicating insurance claims and translating bills into plain language. I&apos;m drawn
+            to the data and backend side of things, and I care about shipping tools people actually use. Right now I&apos;m
+            looking for a full-time role where I can keep learning and own real surface area.
           </p>
           <p style={{ margin: '26px 0 0', fontFamily: serif, fontStyle: 'italic', fontSize: 19, color: 'var(--gold)' }}>— Sayantan</p>
         </div>

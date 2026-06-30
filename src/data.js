@@ -21,7 +21,7 @@ export const heroLinks = [
 // Honest, derived counts — no invented achievement numbers. The 4th tile is
 // static (count: null) so it isn't run through the count-up animation.
 export const stats = [
-  { count: 3, suffix: '+', display: '3+', label: 'Projects shipped', note: 'open-source on GitHub' },
+  { count: 4, suffix: '', display: '4', label: 'Projects shipped', note: 'web · data · AI' },
   { count: 20, suffix: '+', display: '20+', label: 'Technologies', note: 'languages, frameworks & tools' },
   { count: 1, suffix: '', display: '1', label: 'GenAI internship', note: 'LTIMindtree · 2025' },
   { count: null, suffix: '', display: "CS '26", label: 'Graduating', note: 'B.Tech · Computer Science' },
@@ -29,34 +29,43 @@ export const stats = [
 
 export const featured = {
   n: '01',
-  title: 'E-Commerce CDC Pipeline',
-  meta: 'Data Engineering',
-  desc: 'An end-to-end change-data-capture pipeline built on a Medallion architecture — streaming row-level changes through Kafka into a DuckDB warehouse, transformed with dbt, orchestrated by Airflow, and surfaced through live dashboards.',
+  title: 'MediSync',
+  meta: 'Final-Year Project · Healthcare AI',
+  desc: 'AI-powered healthcare middleware that sits between doctors, insurers and patients. It structures clinical notes from speech, checks each prescription against the patient’s insurance policy using RAG, auto-adjudicates claims in under a minute, and decodes hospital bills and discharge summaries into plain language across 10 Indian languages.',
   metrics: [
-    { value: 'Real-time', label: 'CDC capture' },
-    { value: '3-layer', label: 'medallion arch' },
-    { value: 'DuckDB', label: 'warehouse' },
+    { value: '<60s', label: 'auto-adjudication' },
+    { value: '3', label: 'role-based portals' },
+    { value: '10', label: 'Indian languages' },
   ],
-  tags: ['Python', 'Kafka', 'PostgreSQL', 'dbt', 'Airflow', 'DuckDB'],
-  links: [{ label: 'Source ↗', href: 'https://github.com/Sch476/CDC-Pipeline' }],
+  tags: ['Python', 'FastAPI', 'React', 'MongoDB', 'ChromaDB', 'RAG'],
+  links: [],
 }
 
 export const projects = [
   {
     n: '02',
-    title: 'Smart Parking Solution',
-    category: 'Computer Vision · Mobile',
-    desc: 'Real-time parking-spot detection using computer vision, paired with a cross-platform mobile app for live availability and reservations. Built for Smart India Hackathon.',
-    tags: ['React Native', 'Node.js', 'MySQL', 'OpenCV'],
-    source: 'https://github.com/Sch476/SIH1515',
+    title: 'E-Commerce CDC Pipeline',
+    category: 'Data Engineering',
+    desc: 'A change-data-capture pipeline streaming PostgreSQL e-commerce data through a Medallion architecture into a DuckDB warehouse — with SCD Type-2 dimensions, hash-based change detection and real-time Streamlit dashboards.',
+    tags: ['Python', 'Kafka', 'PostgreSQL', 'DuckDB', 'dbt', 'Airflow'],
+    source: 'https://github.com/Sch476/CDC-Pipeline',
     demo: null,
   },
   {
     n: '03',
+    title: 'Smart Parking Solution',
+    category: 'Computer Vision · Mobile',
+    desc: 'A full-stack app with a computer-vision module using ArUco markers for real-time parking-slot detection from CCTV feeds, plus a cross-platform mobile app for live availability, reservations and payments. Built for Smart India Hackathon.',
+    tags: ['React Native', 'Node.js', 'Express', 'MySQL', 'OpenCV'],
+    source: 'https://github.com/Sch476/SIH1515',
+    demo: null,
+  },
+  {
+    n: '04',
     title: 'Planet Care',
     category: 'AI · Full-stack',
-    desc: 'A sustainability web app that uses AI for personalized recycling and conservation tips, with secure Auth0 authentication. Built at HackOdisha.',
-    tags: ['React', 'Django', 'Tailwind CSS', 'ChatGPT API'],
+    desc: 'A sustainability web app using React and Django, integrating the ChatGPT API for personalized recycling and power-conservation tips, with Auth0 authentication and a PostgreSQL backend. Built at HackOdisha.',
+    tags: ['React', 'Django', 'Tailwind CSS', 'PostgreSQL', 'Auth0'],
     source: null,
     demo: 'https://hack-odisha.vercel.app/',
   },
@@ -65,27 +74,28 @@ export const projects = [
 export const skillGroups = [
   { name: 'Languages', items: ['Python', 'C++', 'Java', 'JavaScript', 'SQL'] },
   { name: 'Frontend', items: ['React', 'React Native', 'Tailwind CSS', 'HTML/CSS'] },
-  { name: 'Backend', items: ['Node.js', 'Express', 'Django', 'FastAPI'] },
-  { name: 'Data & Cloud', items: ['PostgreSQL', 'MySQL', 'Kafka', 'DuckDB', 'dbt', 'Airflow', 'Azure'] },
+  { name: 'Backend', items: ['Node.js', 'Express.js', 'FastAPI', 'Django'] },
+  { name: 'Data & Cloud', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Firebase', 'DuckDB', 'Kafka', 'dbt', 'Airflow', 'Streamlit', 'Azure'] },
+  { name: 'Tools', items: ['Docker', 'Git', 'GitHub', 'Selenium', 'Jira', 'Confluence'] },
 ]
 
 export const profiles = [
   { glyph: 'GH', name: 'GitHub', handle: '@Sch476', stat: 'Projects & open-source', href: 'https://github.com/Sch476' },
   { glyph: 'in', name: 'LinkedIn', handle: 'in/sayantan-choudhury', stat: 'Open to full-time roles', href: 'https://linkedin.com/in/sayantan-choudhury/' },
-  { glyph: 'LC', name: 'LeetCode', handle: '@sayantan', stat: 'Problem solving · DSA', href: '#' },
+  { glyph: 'LC', name: 'LeetCode', handle: '@csayantan538', stat: 'Problem solving · DSA', href: 'https://leetcode.com/u/csayantan538/' },
   { glyph: '@', name: 'Email', handle: 'sayantanchr13@gmail.com', stat: 'Usually replies within a day', href: 'mailto:sayantanchr13@gmail.com' },
   { glyph: 'CV', name: 'Résumé', handle: 'Google Drive', stat: 'One page · PDF', href: RESUME_URL },
 ]
 
 // Education card shown in the About section.
 export const education = {
-  degree: 'B.Tech · Computer Science',
-  school: '', // TODO: add your university name
-  badges: ['Class of 2026'],
+  degree: 'B.Tech · Computer Science & Engineering',
+  school: 'Heritage Institute of Technology, Kolkata',
+  badges: ['2022 – 2026', 'GPA 8.72 / 10'],
 }
 
 export const timeline = [
   { when: '2026 — Now', what: 'Open to full-time roles', where: 'Full-stack · Data · GenAI' },
-  { when: 'Jun 2026', what: 'B.Tech, Computer Science', where: 'Graduating' },
+  { when: '2022 – 2026', what: 'B.Tech, Computer Science & Engineering', where: 'Heritage Institute of Technology' },
   { when: 'Apr – May 2025', what: 'GenAI Intern', where: 'LTIMindtree · Kolkata' },
 ]
