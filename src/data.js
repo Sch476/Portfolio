@@ -8,6 +8,7 @@ export const navItems = [
   { label: 'Skills', href: '#skills' },
   { label: 'Profiles', href: '#profiles' },
   { label: 'About', href: '#about' },
+  { label: 'Awards', href: '#achievements' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -97,4 +98,26 @@ export const education = {
 export const timeline = [
   { when: '2022 – 2026', what: 'B.Tech, Computer Science & Engineering', where: 'Heritage Institute of Technology' },
   { when: 'Apr – May 2025', what: 'GenAI Intern', where: 'LTIMindtree · Kolkata' },
+]
+
+export const achievements = [
+  {
+    year: '2024',
+    tag: 'Award',
+    title: '2nd Place — Test IO Testing Cup',
+    detail: 'Placed second among ten top teams in the global software-testing competition.',
+  },
+  {
+    year: '2023',
+    tag: 'Hackathon',
+    title: '3rd Runner-Up — HackHeritage',
+    detail: 'Top finisher in the official college screening round for the Smart India Hackathon (SIH).',
+  },
+  {
+    year: 'Ongoing',
+    tag: 'QA',
+    title: 'Freelance QA Tester',
+    detail: 'Regression testing and test authoring across consumer and enterprise products at Testlio, Test IO, uTest and oPrimes.',
+    metrics: ['4000+ hrs', '30+ products', '3000+ bugs', '5000+ test cases'],
+  },
 ]

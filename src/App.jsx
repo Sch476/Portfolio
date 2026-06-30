@@ -6,6 +6,7 @@ import Work from './components/Work'
 import Skills from './components/Skills'
 import Profiles from './components/Profiles'
 import About from './components/About'
+import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -303,6 +304,7 @@ export default function App() {
       <Skills />
       <Profiles />
       <About />
+      <Achievements />
       <Contact />
       <Footer />
     </div>

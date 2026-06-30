@@ -66,7 +66,7 @@ export default function Contact() {
             }}
           >
             <span style={{ width: 26, height: 1, background: 'var(--gold)' }} />
-            05 — Contact
+            06 — Contact
           </div>
           <h2
             style={{
