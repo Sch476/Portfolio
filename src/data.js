@@ -1,7 +1,7 @@
 // Content for the portfolio. Edit here to update copy without touching markup.
 
 export const RESUME_URL =
-'https://drive.google.com/file/d/1ZpAxrY33cHrdFPollmsAcywcECx7cMSz/view?usp=sharing'
+'https://drive.google.com/file/d/1k6BI8iOl07DcTEDun0N8uFKGgtrI8ny2/view?usp=drive_link'
 
 // Contact form delivery (Web3Forms). The access key lives in .env as
 // VITE_CONTACT_ACCESS_KEY — copy .env.example to .env and paste your key.
