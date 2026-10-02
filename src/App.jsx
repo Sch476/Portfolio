@@ -9,21 +9,28 @@ import About from './components/About'
 import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import CatCursor from './components/CatCursor'
 
-const MOBILE_BREAKPOINT = 860
+const MOBILE_BREAKPOINT = 980
 
 function getInitialTheme() {
   try {
     const s = localStorage.getItem('amehta-theme')
     if (s === 'dark' || s === 'light') return s
-  } catch {
-    /* ignore */
-  }
+  } catch {}
   return 'dark'
+}
+
+function getInitialCursor() {
+  try {
+    if (localStorage.getItem('cursor-style') === 'default') return 'default'
+  } catch {}
+  return 'cat'
 }
 
 export default function App() {
   const [theme, setTheme] = useState(getInitialTheme)
+  const [cursorStyle, setCursorStyle] = useState(getInitialCursor)
   const [isMobile, setIsMobile] = useState(
     typeof window !== 'undefined' ? window.innerWidth < MOBILE_BREAKPOINT : false
   )
@@ -31,8 +38,6 @@ export default function App() {
 
   const rootRef = useRef(null)
   const progRef = useRef(null)
-  const dotRef = useRef(null)
-  const ringRef = useRef(null)
 
   const vars = useMemo(() => buildVars(theme), [theme])
 
@@ -41,9 +46,17 @@ export default function App() {
       const next = t === 'dark' ? 'light' : 'dark'
       try {
         localStorage.setItem('amehta-theme', next)
-      } catch {
-        /* ignore */
-      }
+      } catch {}
+      return next
+    })
+  }, [])
+
+  const toggleCursor = useCallback(() => {
+    setCursorStyle((c) => {
+      const next = c === 'cat' ? 'default' : 'cat'
+      try {
+        localStorage.setItem('cursor-style', next)
+      } catch {}
       return next
     })
   }, [])
@@ -51,12 +64,10 @@ export default function App() {
   const toggleMenu = useCallback(() => setMenuOpen((o) => !o), [])
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
-  // Keep the document background in sync with the theme so over-scroll matches.
   useEffect(() => {
     document.body.style.background = vars['--bg']
   }, [vars])
 
-  // Responsive breakpoint.
   useEffect(() => {
     const onResize = () => {
       const m = window.innerWidth < MOBILE_BREAKPOINT
@@ -69,7 +80,6 @@ export default function App() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  // Scroll progress bar.
   useEffect(() => {
     const onScroll = () => {
       const h = document.documentElement
@@ -82,7 +92,6 @@ export default function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Scroll-reveal + animated counters.
   useEffect(() => {
     const root = rootRef.current
     if (!root) return
@@ -158,66 +167,9 @@ export default function App() {
     }
   }, [])
 
-  // Custom cursor (skipped on touch / coarse-pointer devices).
-  const [cursorOn] = useState(
+  const [hasMouse] = useState(
     () => typeof window !== 'undefined' && !(window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
   )
-  useEffect(() => {
-    if (!cursorOn) return
-    const dot = dotRef.current
-    const ring = ringRef.current
-    if (!dot || !ring) return
-
-    let mx = window.innerWidth / 2
-    let my = window.innerHeight / 2
-    let rx = mx
-    let ry = my
-    let hover = false
-    let raf
-
-    const move = (e) => {
-      mx = e.clientX
-      my = e.clientY
-      dot.style.opacity = '1'
-      ring.style.opacity = '1'
-      dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`
-    }
-    const isInteractive = (e) =>
-      e.target.closest && e.target.closest('a,button,input,textarea,[data-cursor]')
-    const over = (e) => {
-      if (isInteractive(e)) hover = true
-    }
-    const out = (e) => {
-      if (isInteractive(e)) hover = false
-    }
-    const leave = () => {
-      dot.style.opacity = '0'
-      ring.style.opacity = '0'
-    }
-    window.addEventListener('mousemove', move)
-    document.addEventListener('mouseover', over)
-    document.addEventListener('mouseout', out)
-    document.addEventListener('mouseleave', leave)
-
-    const loop = () => {
-      rx += (mx - rx) * 0.16
-      ry += (my - ry) * 0.16
-      const s = hover ? 1.9 : 1
-      ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%) scale(${s})`
-      ring.style.borderColor = hover ? 'var(--gold)' : 'var(--border2)'
-      ring.style.background = hover ? 'var(--glow)' : 'transparent'
-      raf = requestAnimationFrame(loop)
-    }
-    loop()
-
-    return () => {
-      window.removeEventListener('mousemove', move)
-      document.removeEventListener('mouseover', over)
-      document.removeEventListener('mouseout', out)
-      document.removeEventListener('mouseleave', leave)
-      if (raf) cancelAnimationFrame(raf)
-    }
-  }, [cursorOn])
 
   const rootStyle = {
     ...vars,
@@ -226,76 +178,41 @@ export default function App() {
     minHeight: '100vh',
     position: 'relative',
     overflowX: 'hidden',
-    fontFamily: "'Hanken Grotesk', system-ui, sans-serif",
+    isolation: 'isolate',
+    fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
     transition: 'background-color .5s ease, color .5s ease',
-    cursor: cursorOn ? 'none' : 'auto',
   }
 
   return (
     <div ref={rootRef} style={rootStyle}>
-      {/* scroll progress */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          height: '3px',
-          width: '100%',
-          zIndex: 200,
-          background: 'transparent',
-          pointerEvents: 'none',
-        }}
-      >
-        <div
-          ref={progRef}
-          style={{
-            height: '100%',
-            width: '0%',
-            background: 'linear-gradient(90deg,var(--gold),var(--gold-bright))',
-            boxShadow: '0 0 12px var(--glow)',
-          }}
-        />
+      <div aria-hidden="true" className="backdrop">
+        <div className="backdrop-grid" />
+        <div className="backdrop-beam" />
       </div>
 
-      {/* custom cursor */}
       <div
-        ref={dotRef}
+        ref={progRef}
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
-          width: '7px',
-          height: '7px',
-          borderRadius: '50%',
+          height: '1px',
+          width: '0%',
+          zIndex: 200,
           background: 'var(--gold)',
-          zIndex: 9999,
           pointerEvents: 'none',
-          opacity: 0,
-          transition: 'opacity .25s ease',
         }}
       />
-      <div
-        ref={ringRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '34px',
-          height: '34px',
-          borderRadius: '50%',
-          border: '1px solid var(--border2)',
-          zIndex: 9999,
-          pointerEvents: 'none',
-          opacity: 0,
-          transition: 'opacity .25s ease, border-color .2s ease',
-        }}
-      />
+
+      {hasMouse && cursorStyle === 'cat' && <CatCursor />}
 
       <Navbar
         isMobile={isMobile}
         menuOpen={menuOpen}
         theme={theme}
         toggleTheme={toggleTheme}
+        cursorStyle={hasMouse ? cursorStyle : null}
+        toggleCursor={toggleCursor}
         toggleMenu={toggleMenu}
         closeMenu={closeMenu}
       />

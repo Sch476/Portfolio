@@ -1,11 +1,6 @@
-// Content for the portfolio. Edit here to update copy without touching markup.
-
 export const RESUME_URL =
 'https://drive.google.com/file/d/1k6BI8iOl07DcTEDun0N8uFKGgtrI8ny2/view?usp=drive_link'
 
-// Contact form delivery (Web3Forms). The access key lives in .env as
-// VITE_CONTACT_ACCESS_KEY — copy .env.example to .env and paste your key.
-// Get a free key at https://web3forms.com.
 export const CONTACT_ACCESS_KEY = import.meta.env.VITE_CONTACT_ACCESS_KEY || ''
 
 export const navItems = [
@@ -24,8 +19,6 @@ export const heroLinks = [
   { tag: '@', label: 'Email', href: 'mailto:sayantanchr13@gmail.com' },
 ]
 
-// Honest, derived counts — no invented achievement numbers. The 4th tile is
-// static (count: null) so it isn't run through the count-up animation.
 export const stats = [
   { count: 10, suffix: '+', display: '10+', label: 'Projects built', note: 'web · data · AI' },
   { count: 15, suffix: '+', display: '15+', label: 'Open-source projects', note: 'contributed to' },
@@ -93,7 +86,6 @@ export const profiles = [
   { glyph: 'CV', name: 'Résumé', handle: 'Google Drive', stat: 'One page · PDF', href: RESUME_URL },
 ]
 
-// Education card shown in the About section.
 export const education = {
   degree: 'B.Tech · Computer Science & Engineering',
   school: 'Heritage Institute of Technology, Kolkata',

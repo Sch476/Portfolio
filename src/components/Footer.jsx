@@ -2,28 +2,28 @@ import { navItems, profiles } from '../data'
 import { extAttrs, preventHash } from '../util'
 
 const mono = "'JetBrains Mono', monospace"
-const serif = "'Newsreader', serif"
 
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer style={{ borderTop: '1px solid var(--border)', background: 'var(--bg2)' }}>
-      <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(40px,6vw,64px) clamp(20px,5vw,56px)' }}>
+    <footer style={{ borderTop: '1px solid var(--border)' }}>
+      <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(40px,6vw,64px) clamp(16px,5vw,56px)' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div style={{ maxWidth: 280 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
               <span
                 style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 9,
-                  border: '1px solid var(--gold)',
+                  width: 28,
+                  height: 28,
+                  borderRadius: 8,
+                  background: 'var(--text)',
+                  color: 'var(--bg)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontFamily: serif,
-                  fontSize: 17,
-                  color: 'var(--gold)',
+                  fontSize: 12,
+                  fontWeight: 800,
+                  letterSpacing: '-0.04em',
                 }}
               >
                 SC
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
           <div style={{ display: 'flex', gap: 'clamp(28px,6vw,64px)', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
-              <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--faint)' }}>
+              <div style={{ fontFamily: mono, fontSize: 11, color: 'var(--faint)' }}>
                 Navigate
               </div>
               {navItems.map((item) => (
@@ -48,7 +48,7 @@ export default function Footer() {
               ))}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
-              <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--faint)' }}>
+              <div style={{ fontFamily: mono, fontSize: 11, color: 'var(--faint)' }}>
                 Elsewhere
               </div>
               {profiles.map((p) => (
@@ -74,7 +74,7 @@ export default function Footer() {
           }}
         >
           <span>© {year} Sayantan Choudhury. All rights reserved.</span>
-          <span>Built with React + Tailwind · navy + gold</span>
+          <span>Built with React · a cat follows your cursor</span>
         </div>
       </div>
     </footer>

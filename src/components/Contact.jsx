@@ -3,13 +3,10 @@ import { CONTACT_ACCESS_KEY, heroLinks } from '../data'
 import { extAttrs, preventHash } from '../util'
 
 const mono = "'JetBrains Mono', monospace"
-const serif = "'Newsreader', serif"
 
 const labelStyle = {
   fontFamily: mono,
-  fontSize: 11,
-  letterSpacing: '.12em',
-  textTransform: 'uppercase',
+  fontSize: 11.5,
   color: 'var(--muted)',
 }
 const errStyle = { fontFamily: mono, fontSize: 11.5, color: '#E5786A' }
@@ -21,7 +18,7 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [submitError, setSubmitError] = useState(null)
-  const [hp, setHp] = useState('') // honeypot
+  const [hp, setHp] = useState('')
 
   const update = (key) => (e) => {
     const v = e.target.value
@@ -42,7 +39,6 @@ export default function Contact() {
     setErrors({})
     setSubmitError(null)
 
-    // Silently swallow honeypot hits (likely bots).
     if (hp) {
       setSent(true)
       return
@@ -86,39 +82,28 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      style={{ scrollMarginTop: 80, maxWidth: 1180, margin: '0 auto', padding: 'clamp(64px,10vw,128px) clamp(20px,5vw,56px)' }}
+      style={{ scrollMarginTop: 90, maxWidth: 1180, margin: '0 auto', padding: 'clamp(64px,10vw,128px) clamp(16px,5vw,56px)' }}
     >
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(36px,6vw,72px)' }}>
-        <div data-reveal style={{ flex: '1 1 360px', minWidth: 300 }}>
-          <div
-            style={{
-              fontFamily: mono,
-              fontSize: 12,
-              letterSpacing: '.22em',
-              textTransform: 'uppercase',
-              color: 'var(--gold)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-            }}
-          >
-            <span style={{ width: 26, height: 1, background: 'var(--gold)' }} />
-            06 — Contact
+        <div data-reveal style={{ flex: '1 1 360px', minWidth: 'min(300px,100%)' }}>
+          <div style={{ fontFamily: mono, fontSize: 12, color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ color: 'var(--gold)' }}>06</span>
+            <span style={{ width: 18, height: 1, background: 'var(--border2)' }} />
+            Contact
           </div>
           <h2
             style={{
               margin: '14px 0 0',
-              fontFamily: serif,
-              fontWeight: 500,
-              fontSize: 'clamp(34px,5.5vw,60px)',
-              lineHeight: 1.02,
-              letterSpacing: '-0.01em',
+              fontWeight: 600,
+              fontSize: 'clamp(34px,5.4vw,58px)',
+              lineHeight: 1.04,
+              letterSpacing: '-0.04em',
               color: 'var(--text)',
             }}
           >
             Let&apos;s build
             <br />
-            something together.
+            <span style={{ color: 'var(--gold)' }}>something together.</span>
           </h2>
           <p style={{ margin: '22px 0 0', maxWidth: 420, fontSize: 15.5, lineHeight: 1.65, color: 'var(--muted)' }}>
             I&apos;m looking for full-time roles and interesting collaborations. Drop me a line — I&apos;d love to chat.
@@ -126,7 +111,7 @@ export default function Contact() {
           <a href="mailto:sayantanchr13@gmail.com" data-cursor className="link-underline" style={{ marginTop: 24 }}>
             sayantanchr13@gmail.com
           </a>
-          <div style={{ display: 'flex', gap: 10, marginTop: 28 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 28 }}>
             {heroLinks.map((item) => (
               <a
                 key={item.label}
@@ -142,7 +127,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div data-reveal style={{ flex: '1 1 380px', minWidth: 300 }}>
+        <div data-reveal style={{ flex: '1 1 380px', minWidth: 'min(300px,100%)' }}>
           {!sent && (
             <form
               onSubmit={onSubmit}
@@ -152,7 +137,7 @@ export default function Contact() {
                 gap: 18,
                 background: 'var(--surface)',
                 border: '1px solid var(--border)',
-                borderRadius: 18,
+                borderRadius: 20,
                 padding: 'clamp(22px,3vw,34px)',
               }}
             >
@@ -177,7 +162,6 @@ export default function Contact() {
                 />
                 {errors.message && <span style={errStyle}>{errors.message}</span>}
               </div>
-              {/* honeypot — hidden from humans, catches bots */}
               <input
                 type="text"
                 name="company"
@@ -195,7 +179,7 @@ export default function Contact() {
                 disabled={sending}
                 style={sending ? { opacity: 0.7, cursor: 'wait' } : undefined}
               >
-                {sending ? 'Sending…' : 'Send message →'}
+                {sending ? 'Sending…' : 'Send message'}
               </button>
               {submitError && <span style={errStyle}>{submitError}</span>}
             </form>
@@ -209,8 +193,8 @@ export default function Contact() {
                 textAlign: 'center',
                 gap: 14,
                 background: 'var(--surface)',
-                border: '1px solid var(--gold)',
-                borderRadius: 18,
+                border: '1px solid var(--border2)',
+                borderRadius: 20,
                 padding: 'clamp(34px,5vw,56px)',
               }}
             >
@@ -219,7 +203,7 @@ export default function Contact() {
                   width: 54,
                   height: 54,
                   borderRadius: '50%',
-                  border: '1.5px solid var(--gold)',
+                  border: '1px solid var(--gold)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -229,7 +213,7 @@ export default function Contact() {
               >
                 ✓
               </span>
-              <h3 style={{ margin: 0, fontFamily: serif, fontWeight: 500, fontSize: 26, color: 'var(--text)' }}>Message sent</h3>
+              <h3 style={{ margin: 0, fontWeight: 600, fontSize: 24, letterSpacing: '-0.03em', color: 'var(--text)' }}>Message sent</h3>
               <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: 'var(--muted)', maxWidth: 300 }}>
                 Thanks for reaching out — your message landed in my inbox and I&apos;ll get back to you shortly.
               </p>
