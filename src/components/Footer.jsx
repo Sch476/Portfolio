@@ -74,7 +74,7 @@ export default function Footer() {
           }}
         >
           <span>© {year} Sayantan Choudhury. All rights reserved.</span>
-          <span>Built with React · a cat follows your cursor</span>
+          <span>Built with React</span>
         </div>
       </div>
     </footer>
